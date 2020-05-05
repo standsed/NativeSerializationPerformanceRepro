@@ -96,9 +96,4 @@ map JsonElement to List<String> 1353.416678 millis
         content.forEach { sb.append(it) }
         return sb.substring(0)
     }
-
-    /*
-    ios
-    parse as JsonArray 134.516489 millis
-map JsonElement to List<String> 163.575033 millis*/
 }
