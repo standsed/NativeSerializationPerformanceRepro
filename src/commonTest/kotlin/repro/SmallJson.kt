@@ -1,0 +1,5 @@
+package repro
+
+object SmallJson {
+    val content = "[{\"_id\": \"5eb16161caa374df7dc3e9f9\",\"index\": 0,\"guid\": \"0e1516d8-d3da-4971-842e-b8e088e7efbc\",\"isActive\": true,\"balance\": \"\$1,618.54\",\"picture\": \"http://placehold.it/32x32\",\"age\": 39,\"eyeColor\": \"green\",\"name\": \"Deirdre Cain\",\"gender\": \"female\",\"company\": \"ROBOID\",\"email\": \"deirdrecain@roboid.com\",\"phone\": \"+1 (929) 569-3514\",\"address\": \"342 Clinton Street, Coventry, Texas, 8792\",\"about\": \"Dolor minim irure officia nisi cupidatat do consectetur labore non incididunt minim tempor. Nisi et fugiat laborum fugiat tempor. Irure est nulla mollit sunt Lorem mollit exercitation.\\r\\n\",\"registered\": \"2017-04-16T11:20:55 -03:00\",\"latitude\": -57.432717,\"longitude\": 110.565797,\"tags\": [\"consequat\",\"duis\",\"ullamco\",\"et\",\"culpa\",\"labore\",\"nisi\"],\"friends\": [{\"id\": 0,\"name\": \"Antonia Bass\"},{\"id\": 1,\"name\": \"Wall Wiley\"},{\"id\": 2,\"name\": \"Jordan Hahn\"}],\"greeting\": \"Hello, Deirdre Cain! You have 6 unread messages.\",\"favoriteFruit\": \"banana\"}]"
+}
