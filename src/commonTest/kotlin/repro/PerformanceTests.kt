@@ -8,12 +8,7 @@ import kotlin.time.measureTime
 
 class PerformanceTests {
 
-    @Test
-    fun smallTest() {
-        exec(SmallJson.content)
-        println("2nd run")
-        exec(SmallJson.content)
-        /*
+    /*
 JVM
 parse as JsonArray 91.329014 millis
 map JsonElement to List<String> 1.123484 millis
@@ -28,52 +23,57 @@ map JsonElement to List<String> 0.164335 millis
 parse as JsonArray 0.119081 millis
 map JsonElement to List<String> 0.153322 millis
 */
+    @Test
+    fun smallTest() {
+        exec(SmallJson.content)
+        println("2nd run")
+        exec(SmallJson.content)
     }
 
-    @Test
-    fun oneMBTest() {
-        val json = toString(OneMBJson.content)
-        exec(json)
-        println("2nd run")
-        exec(json)
-        /*
-        JVM
+    /*
+JVM
 parse as JsonArray 100.891387 millis
 map JsonElement to List<String> 29.741769 millis
 2nd run
 parse as JsonArray 16.104879 millis
 map JsonElement to List<String> 23.704069 millis
 
-        iOS x64
+iOS x64
 parse as JsonArray 133.770347 millis
 map JsonElement to List<String> 168.310878 millis
 2nd run
 parse as JsonArray 160.062425 millis
 map JsonElement to List<String> 170.953403 millis
-        */
-    }
-
+*/
     @Test
-    fun fiveMBTest() {
-        val json = toString(FiveMBJson.content)
+    fun oneMBTest() {
+        val json = toString(OneMBJson.content)
         exec(json)
         println("2nd run")
         exec(json)
-        /*
-        JVM
+    }
+
+    /*
+JVM
 parse as JsonArray 141.153022 millis
 map JsonElement to List<String> 210.782041 millis
 2nd run
 parse as JsonArray 79.185944 millis
 map JsonElement to List<String> 182.276485 millis
 
-        iOS x64
+iOS x64
 parse as JsonArray 1586.538473 millis
 map JsonElement to List<String> 1441.437562 millis
 2nd run
 parse as JsonArray 1835.876132 millis
 map JsonElement to List<String> 1353.416678 millis
-        */
+*/
+    @Test
+    fun fiveMBTest() {
+        val json = toString(FiveMBJson.content)
+        exec(json)
+        println("2nd run")
+        exec(json)
     }
 
     @OptIn(ExperimentalTime::class)
@@ -84,10 +84,11 @@ map JsonElement to List<String> 1353.416678 millis
         }
         println("parse as JsonArray ${t.inMilliseconds} millis")
 
+        var jsons: List<String>
         val t2 = measureTime {
-            val jsons = jsonArray.map { it.toString() }
+            jsons = jsonArray.map { it.toString() }
         }
-        println("map JsonElement to List<String> ${t2.inMilliseconds} millis")
+        println("map ${jsons.count()} JsonElement to List<String> ${t2.inMilliseconds} millis")
     }
 
     @OptIn(ExperimentalStdlibApi::class)
