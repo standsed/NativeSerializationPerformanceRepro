@@ -1,45 +1,45 @@
 plugins {
-    kotlin("multiplatform") version "1.3.72"
-    kotlin("plugin.serialization") version "1.3.72"
+    kotlin("multiplatform") version "1.4.0"
+    kotlin("plugin.serialization") version "1.4.0"
 }
 repositories {
     mavenCentral()
+    maven ( url = "https://kotlin.bintray.com/kotlinx" )
+    maven(url = "https://dl.bintray.com/kotlin/kotlin-eap")
 }
 
 group = "com.example"
 version = "0.0.1"
-val serializationRtVersion = "0.20.0"
+val serializationVersion = "1.0.0-RC"
 
 kotlin {
     jvm()
     iosX64()
+    macosX64()
 
-    targets.all {
-        compilations.all {
-            kotlinOptions {
-                freeCompilerArgs = listOf("-Xuse-experimental=kotlinx.serialization.UnstableDefault")
-            }
-        }
-    }
+
+    macosX64().binaries.getTest("DEBUG").freeCompilerArgs += arrayOf("-opt", "-Xallocator=mimalloc")
+    iosX64().binaries.getTest("DEBUG").freeCompilerArgs += arrayOf("-opt", "-Xallocator=mimalloc")
 
     sourceSets {
         val iosX64Main by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-native:$serializationRtVersion")
+            }
+        }
+
+        val macosX64Main by getting {
+            dependencies {
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serializationRtVersion")
             }
         }
 
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serializationRtVersion")
-                implementation(kotlin("stdlib-common"))
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
             }
         }
 
